@@ -1,0 +1,89 @@
+.App {
+    font-family: Arial, sans-serif;
+  }
+  
+  .cards-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr); /* Default to 2 cards per row */
+  }
+  
+  /* Card styles */
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .card-price {
+    font-size: 1rem;
+    color: #333;
+    margin-left: 10px;
+  }
+  
+  .card-description {
+    font-size: 0.875rem;
+    color: #777;
+    margin-top: 10px;
+  }
+  
+  .add-to-cart {
+    width: 100%;
+    padding: 12px;
+    background-color: rgb(107, 161, 107);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #0056b3;
+  }
+  
+  .heart-icon-wrapper {
+  /* padding: 3px; */
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: flex-start; */
+  }
+  
+  /* Media Query for Tablets and Laptops */
+  @media (min-width: 768px) {
+    .cards-container {
+      grid-template-columns: repeat(4, 1fr); /* Show 4 cards per row on larger screens */
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .cards-container {
+      grid-template-columns: repeat(2, 1fr); /* Show 2 cards per row on smaller screens */
+    }
+  }
+  

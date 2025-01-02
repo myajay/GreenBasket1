@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, IconButton, useMediaQuery, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
+import { FaUser, FaEnvelope } from 'react-icons/fa';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
 
   // Check if the screen size is mobile (small)
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -21,7 +23,15 @@ const Header = () => {
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#81C784' }}> {/* Light Green Color */}
       <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            flexGrow: 1,
+            color: '#ffffff',
+            fontWeight: 'bold',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)', // Adds shadow effect
+          }}
+        >
           Green Basket
         </Typography>
 
@@ -40,9 +50,14 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button color="inherit">Home</Button>
-          <Button color="inherit">About</Button>
-          <Button color="inherit">Services</Button>
+          <Button color="inherit" className='txtTrans'>
+          <Link to="/Login" style={{ color: 'white',textDecoration: 'none', }}>
+              <FaUser  /> Login
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <FaEnvelope style={{ padding: '1px' }} /> Contact
+          </Button>
         </Box>
       </Toolbar>
 
@@ -53,9 +68,14 @@ const Header = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Home</MenuItem>
-          <MenuItem onClick={handleClose}>About</MenuItem>
-          <MenuItem onClick={handleClose}>Services</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/Login" style={{ color: 'black',textDecoration: 'none', }}>
+              <FaUser /> Login
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <FaEnvelope /> Contact
+          </MenuItem>
         </Menu>
       )}
     </AppBar>
