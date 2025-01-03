@@ -100,8 +100,10 @@ const Header = () => {
         >
           <MenuItem onClick={handleClose}>
             <Link to="/Login" style={{ color: 'black',textDecoration: 'none', }}>
-              <FaUser /> 
+            <FaUser /> 
+
               {userName ? (
+                
           // If userName exists, show the user's name instead of Login
           <span style={{ color: 'black', fontWeight: 'bold', fontFamily: 'Arial, sans-serif', fontSize: '1rem' }}>
           Hi, {userName}
@@ -109,8 +111,8 @@ const Header = () => {
         
         ) : (
           // If userName does not exist, show Login button
-          <Link to="/Login" style={{ color: 'white', textDecoration: 'none' }}>
-            <FaUser /> Login
+          <Link to="/Login" style={{ color: 'black', textDecoration: 'none' }}>
+          Login
           </Link>
         )}
             </Link>
