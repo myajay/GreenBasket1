@@ -1,34 +1,81 @@
-// import react from './react'
+import React, { useState } from 'react';
 import './Login.css'
-import Form from 'react-bootstrap/Form';
-function Login(){
+// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
+function Login() {
+  // States to manage form data and errors
+  const [name, setName] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); 
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    return(
+    // Reset any previous error
+    setError('');
+
+    debugger
+
+    // Validate the form fields
+    if (!name || !mobile) {
+      setError('Please enter both name and mobile number');
+      return;
+    }
+
+    // Check if the mobile number is valid (basic validation)
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(mobile)) {
+      setError('Please enter a valid 10-digit mobile number');
+      return;
+    }
+
+    // Store data in sessionStorage
+    sessionStorage.setItem('userName', name);
+    sessionStorage.setItem('userMobile', mobile);
+
+    // Simulate the OTP sending process (just a log for now)
+    console.log('OTP sent to:', mobile);
+    navigate('/Otp');
+    // Optional: You can redirect or show success message here
+    alert('OTP has been "sent" (data stored in session)');
+  };
+
+  return (
+    <div className="login-container">
+      <h2 className='loginHeader'>Login</h2>
+      
+      {/* Show error message if there is one */}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      
+      <form onSubmit={handleSubmit}>
         <div>
-  <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      {/* <Button variant="primary" type="submit">
-        Submit
-      </Button> */}
-    </Form>
-  
+          <label>Name:</label>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
-    )
 
+        <div>
+          <label>Mobile Number:</label>
+          <input
+            type="text"
+            placeholder="Enter your 10 digit mobile number"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
+          />
+        </div>
+
+{/* <Link to='/otp'> */}
+<button className='Loginbtn' type="submit">Send OTP</button>
+
+{/* </Link> */}
+      </form>
+    </div>
+  );
 }
 
 export default Login;

@@ -4,9 +4,9 @@ import './Home.css'
 import tomatoImage from '../../../assets/tomoto1.jpg';
 
 import { FaHeart } from 'react-icons/fa'; // Font Awesome icons
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Alert } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 const products = new Array(8).fill({
     title: 'TOMATO',
     price: '$30',
@@ -31,14 +31,24 @@ function Home(){
       }, 2000);
     };
 
+
+
+    const [userName, setUserName] = useState('');
+  useEffect(() => {
+    const storedUserName = sessionStorage.getItem('userName');
+    if (storedUserName) {
+      setUserName(storedUserName);  // Set the userName from sessionStorage
+    }
+  }, []);
+
     return(
-        <div>
+        <div className='bgColorHome'>
 
             
       {showAlert && (
         <Alert variant="success" onClose={handleClose} dismissible>
           <Alert.Heading>Success!</Alert.Heading>
-          <p>Your item has been added to the cart.</p>
+          <p>Your item has been added to the wishlist.</p>
         </Alert>
       )}
 
@@ -69,8 +79,31 @@ function Home(){
                 <h3 className="card-title">{product.title}</h3>
                 <h2 className="card-price">{product.price}</h2>
               </div>
-              <p className="card-description">{product.description}</p>
-              <button className="add-to-cart">Add to Cart</button>
+              <div className="card-footer1">
+            <p className="card-description"> <b></b>{product.description}</p>
+
+            {userName ? (
+                <button className="add-to-cart">
+                <Link to="/AddToCart" style={{ textDecoration: 'none', color: 'inherit' }} >
+                Add to Cart 
+                </Link> 
+                  </button>
+
+            ):(
+
+              <button className="add-to-cart">
+              <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }} >
+              Add to Cart 
+              </Link> 
+                </button>
+
+            )}
+
+
+
+
+          
+</div>
             </div>
           </div>
         ))}

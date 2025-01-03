@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, IconButton, useMediaQuery, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '@mui/material/styles';
@@ -20,6 +20,14 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const [userName, setUserName] = useState('');
+  useEffect(() => {
+    const storedUserName = sessionStorage.getItem('userName');
+    if (storedUserName) {
+      setUserName(storedUserName);  // Set the userName from sessionStorage
+    }
+  }, []);
+
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#81C784' }}> {/* Light Green Color */}
       <Toolbar>
@@ -30,9 +38,12 @@ const Header = () => {
             color: '#ffffff',
             fontWeight: 'bold',
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)', // Adds shadow effect
+            
           }}
+          
         >
-          Green Basket
+         <span>Green Basket</span> 
+
         </Typography>
 
         {/* Mobile Menu Icon */}
@@ -50,11 +61,30 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button color="inherit" className='txtTrans'>
+          {/* <Button color="inherit" className='txtTrans'>
           <Link to="/Login" style={{ color: 'white',textDecoration: 'none', }}>
-              <FaUser  /> Login
+              <FaUser  />      
+         Login
             </Link>
-          </Button>
+          </Button> */}
+
+<Button color="inherit" className='txtTrans'>
+        {/* Check if userName exists in sessionStorage */}
+        {userName ? (
+          // If userName exists, show the user's name instead of Login
+          <span style={{ color: 'white', fontWeight: 'bold', fontFamily: 'Arial, sans-serif', fontSize: '1rem' }}>
+          Hi, {userName}
+        </span>
+        
+        ) : (
+          // If userName does not exist, show Login button
+          <Link to="/Login" style={{ color: 'white', textDecoration: 'none' }}>
+            <FaUser /> Login
+          </Link>
+        )}
+      </Button>
+
+
           <Button color="inherit">
             <FaEnvelope style={{ padding: '1px' }} /> Contact
           </Button>
@@ -70,7 +100,19 @@ const Header = () => {
         >
           <MenuItem onClick={handleClose}>
             <Link to="/Login" style={{ color: 'black',textDecoration: 'none', }}>
-              <FaUser /> Login
+              <FaUser /> 
+              {userName ? (
+          // If userName exists, show the user's name instead of Login
+          <span style={{ color: 'black', fontWeight: 'bold', fontFamily: 'Arial, sans-serif', fontSize: '1rem' }}>
+          Hi, {userName}
+        </span>
+        
+        ) : (
+          // If userName does not exist, show Login button
+          <Link to="/Login" style={{ color: 'white', textDecoration: 'none' }}>
+            <FaUser /> Login
+          </Link>
+        )}
             </Link>
           </MenuItem>
           <MenuItem onClick={handleClose}>

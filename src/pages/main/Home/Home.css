@@ -21,11 +21,11 @@
   
   .card-image {
     width: 100%;
-    height: auto;
+    height: 25vh;
   }
   
   .card-content {
-    padding: 15px;
+    padding: 10px;
   }
   
   .card-header {
@@ -33,6 +33,25 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .add-to-cart:hover {
+    background-color: green;
+    color: white;
+}
+
+.card-footer1 {
+    padding-top: 10px; /* Increase space above button */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-direction: column;  */
+}
+
+.card-description {
+    font-size: 0.875rem;
+    color: #777;
+    margin-bottom: 10px; /* Add margin for spacing between description and button */
+}
   
   .card-title {
     font-size: 1.1rem;
@@ -45,27 +64,27 @@
     margin-left: 10px;
   }
   
-  .card-description {
-    font-size: 0.875rem;
-    color: #777;
-    margin-top: 10px;
-  }
+
   
   .add-to-cart {
-    width: 100%;
-    padding: 12px;
-    background-color: rgb(107, 161, 107);
-    color: white;
-    border: none;
-    border-radius: 5px;
+    padding: 8px 16px; /* Adjust the padding for a smaller height */
+    background-color: rgb(213 223 211);
+    border: 1px solid rgb(127, 174, 127);
+    color: rgb(78 135 78);
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-  
-  .add-to-cart:hover {
-    background-color: #0056b3;
-  }
+    font-family: 'cambria';
+    font-weight: 600;
+    font-size: 0.7rem; /* Slightly reduce font size for consistency */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 25px; /* Set a specific height for the button */
+    width: 38%; /* Keep it 100% width of the container */
+    
+}
+
   
   .heart-icon-wrapper {
   /* padding: 3px; */
@@ -85,5 +104,14 @@
     .cards-container {
       grid-template-columns: repeat(2, 1fr); /* Show 2 cards per row on smaller screens */
     }
+    .add-to-cart{
+      width: 50%;
+    }
   }
+
+
+  .bgColorHome{
+    background: #cdeccd;
+  }
+
   
