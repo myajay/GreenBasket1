@@ -38,7 +38,7 @@ function Login() {
     console.log('OTP sent to:', mobile);
     navigate('/Otp');
     // Optional: You can redirect or show success message here
-    alert('OTP has been "sent" (data stored in session)');
+    alert('OTP has been "sent" ');
   };
 
   return (

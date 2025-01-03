@@ -19,14 +19,27 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const [userName, setUserName] = useState('');
+
+  // This useEffect will run only once when the component mounts
   useEffect(() => {
     const storedUserName = sessionStorage.getItem('userName');
     if (storedUserName) {
       setUserName(storedUserName);  // Set the userName from sessionStorage
     }
-  }, []);
+
+    // You can optionally listen for sessionStorage changes with a timeout or interval
+    const intervalId = setInterval(() => {
+      const updatedUserName = sessionStorage.getItem('userName');
+      if (updatedUserName && updatedUserName !== userName) {
+        setUserName(updatedUserName); // Update state if it changes
+      }
+    }, 1000); // Check every second
+
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, [userName]); // We check userName to see if it's changed
+
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: '#81C784' }}> {/* Light Green Color */}
